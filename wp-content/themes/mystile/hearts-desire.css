@@ -1,0 +1,12 @@
+.col-3 .block{
+	width: 33%;
+	display: inline-block;
+}
+
+#skin-calc-button{
+	margin-left: 100px;
+}
+
+#top-nav{
+	float: right;
+}
