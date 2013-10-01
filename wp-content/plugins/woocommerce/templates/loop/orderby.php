@@ -15,6 +15,7 @@ if ( 1 == $wp_query->found_posts || ! woocommerce_products_will_display() )
 	return;
 ?>
 <form class="woocommerce-ordering" method="get">
+    <div class="styled-select">
 	<select name="orderby" class="orderby">
 		<?php
 			$catalog_orderby = apply_filters( 'woocommerce_catalog_orderby', array(
@@ -33,6 +34,7 @@ if ( 1 == $wp_query->found_posts || ! woocommerce_products_will_display() )
 				echo '<option value="' . esc_attr( $id ) . '" ' . selected( $orderby, $id, false ) . '>' . esc_attr( $name ) . '</option>';
 		?>
 	</select>
+    </div>
 	<?php
 		// Keep query string vars intact
 		foreach ( $_GET as $key => $val ) {

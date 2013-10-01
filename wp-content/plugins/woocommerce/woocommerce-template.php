@@ -408,7 +408,6 @@ if ( ! function_exists( 'woocommerce_get_product_thumbnail' ) ) {
 	 */
 	function woocommerce_get_product_thumbnail( $size = 'shop_catalog', $placeholder_width = 0, $placeholder_height = 0  ) {
 		global $post;
-
 		if ( has_post_thumbnail() )
 			return get_the_post_thumbnail( $post->ID, $size );
 		elseif ( woocommerce_placeholder_img_src() )
@@ -706,6 +705,14 @@ if ( ! function_exists( 'woocommerce_product_description_tab' ) ) {
 		woocommerce_get_template( 'single-product/tabs/description.php' );
 	}
 }
+
+if ( !function_exists ('prp_ingredients_tab')){
+    
+    function prp_ingredients_tab(){
+            woocommerce_get_template('single-product/tabs/ingredients.php');
+    }
+}
+
 if ( ! function_exists( 'woocommerce_product_additional_information_tab' ) ) {
 
 	/**
@@ -744,7 +751,9 @@ if ( ! function_exists( 'woocommerce_default_product_tabs' ) ) {
 	 */
 	function woocommerce_default_product_tabs( $tabs = array() ) {
 		global $product, $post;
-
+                
+                $attributes = $product->get_attributes();
+                
 		// Description tab - shows product content
 		if ( $post->post_content )
 			$tabs['description'] = array(
@@ -752,7 +761,16 @@ if ( ! function_exists( 'woocommerce_default_product_tabs' ) ) {
 				'priority' => 10,
 				'callback' => 'woocommerce_product_description_tab'
 			);
-
+                
+                //Shows ingredients if they are set
+                if (isset($attributes['ingredients'])){
+                    $tabs['ingredients'] = array(
+                        'title' => __('Ingredients', 'woocommerce'),
+                        'priority' => 20,
+                        'callback' => 'prp_ingredients_tab'
+                );
+                }
+                
 		// Additional information tab - shows attributes
 		if ( $product->has_attributes() || ( get_option( 'woocommerce_enable_dimension_product_attributes' ) == 'yes' && ( $product->has_dimensions() || $product->has_weight() ) ) )
 			$tabs['additional_information'] = array(
@@ -760,7 +778,7 @@ if ( ! function_exists( 'woocommerce_default_product_tabs' ) ) {
 				'priority' => 20,
 				'callback' => 'woocommerce_product_additional_information_tab'
 			);
-
+                
 		// Reviews tab - shows comments
 		if ( comments_open() )
 			$tabs['reviews'] = array(

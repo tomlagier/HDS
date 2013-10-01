@@ -43,14 +43,17 @@ foreach ( $includes as $i ) {
 /* You can add custom functions below */
 /*-----------------------------------------------------------------------------------*/
 
+add_image_size( 'homepage-featured-image', 300, 240, true );
+
 function homepage_widgets_init() {
-	register_sidebar(array( 'name' => 'Homepage Featured Content 1','id' => 'home-1','description' => "First homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
+	register_sidebar(array( 'name' => 'Homepage Bottom Featured Content 1','id' => 'home-1','description' => "First homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
 
-	register_sidebar(array( 'name' => 'Homepage Featured Content 2','id' => 'home-2','description' => "Second homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
+	register_sidebar(array( 'name' => 'Homepage Bottom Featured Content 2','id' => 'home-2','description' => "Second homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
 
-	register_sidebar(array( 'name' => 'Homepage Featured Content 3','id' => 'home-3','description' => "Third homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
+	register_sidebar(array( 'name' => 'Homepage Bottom Featured Content 3','id' => 'home-3','description' => "Third homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
 
-	register_sidebar(array( 'name' => 'Homepage Featured Content 4','id' => 'home-4','description' => "Fourth homepage featured content area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
+    register_sidebar(array( 'name' => 'Product Social Media Items','id' => 'product-social-media','description' => "Widget area for social media buttons", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
+
 }
 add_action( 'widgets_init', 'homepage_widgets_init' );
 

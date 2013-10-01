@@ -18,7 +18,6 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && basename( __FILE__ ) == basename(
 	get_header();
 	global $woo_options;
 ?>
-       
     <div id="content" class="page col-full">
     
     	<?php woo_main_before(); ?>

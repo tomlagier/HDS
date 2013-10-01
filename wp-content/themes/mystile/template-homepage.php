@@ -40,23 +40,36 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && basename( __FILE__ ) == basename(
 		<?php if ($total > 0){ ?>
 				<section id="home-widgets-top" class="col-full col-3 fix">
 	
-				<?php $i = 0; while ( $i < 3 ) { $i++; ?>
-					<?php if ( is_active_sidebar( 'home-' . $i ) ) { ?>
+                                    <?php 
+                                        $homepage_args = array( 'category_name' => 'homepage-features',
+                                                'orderby' => 'rand',
+                                                'posts_per_page' => 3);
+                                        $homepage_post_query =  new WP_Query( $homepage_args ); 
+                                        if($homepage_post_query->have_posts()) {
+                                            while ($homepage_post_query->have_posts()) {
+                                                $homepage_post_query->the_post(); ?>
+                                                <div class="homepage-feature">
+                                                    <a href="<?php echo get_post_custom_values("url", get_the_id())[0]; ?>" class="homepage-link"><h3><?php the_title(); ?></h3>
+                                                    <?php if (has_post_thumbnail()) {
+                                                        $attrs = array( 'size' => 'homepage-featured-image',
+                                                                'class' => ' homepage-featured-image');
+                                                        the_post_thumbnail( 'homepage-featured-image' );
+                                                    } ?>
+                                                    <div class="homepage-featured-description"><?php the_content(); ?></div>
+                                                    </a>
+                                                </div>
+                                                
+                                            <?php }
+                                        } ?>
+			</section>
+			<section id="home-widget-bottom" class="col-full col-1 fix">                           
+                                <?php for($i = 1; $i <= 3; $i++){ ?>
+				<?php if ( is_active_sidebar( 'home-' . $i ) ) { ?>
 		
-						<div class="block home-widget-<?php echo $i; ?>">
+						<div class="block home-widget-<?php echo $i ?>">
 							<?php dynamic_sidebar( 'home-' . $i ); ?>
 						</div>
-	
-					<?php } ?>
-				<?php } // End WHILE Loop ?>
-			</section>
-			<section id="home-widget-bottom" class="col-full col-1 fix">
-				<?php if ( is_active_sidebar( 'home-4' ) ) { ?>
-		
-						<div class="block home-widget-4">
-							<?php dynamic_sidebar( 'home-4' ); ?>
-						</div>
-	
+                                        <?php } ?> 
 					<?php } ?>
 			
 			</section>

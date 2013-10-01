@@ -24,13 +24,16 @@ get_header('shop'); ?>
 	?>
 
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+                <div class="cat-wrapper">
+                    <div class="cat-title-wrapper">
+                            <h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
 
-			<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
 
-		<?php endif; ?>
+                    <?php endif; ?>
 
-		<?php do_action( 'woocommerce_archive_description' ); ?>
-
+                    <?php do_action( 'woocommerce_archive_description' ); ?>
+                    </div>
+                </div>
 		<?php if ( have_posts() ) : ?>
 
 			<?php
@@ -70,6 +73,7 @@ get_header('shop'); ?>
 
 		<?php endif; ?>
 
+
 	<?php
 		/**
 		 * woocommerce_after_main_content hook
@@ -78,7 +82,17 @@ get_header('shop'); ?>
 		 */
 		do_action('woocommerce_after_main_content');
 	?>
-
+<section id="home-widget-bottom" class="col-full col-1 fix">                           
+                                <?php for($i = 1; $i <= 3; $i++){ ?>
+				<?php if ( is_active_sidebar( 'home-' . $i ) ) { ?>
+		
+						<div class="block home-widget-<?php echo $i ?>">
+							<?php dynamic_sidebar( 'home-' . $i ); ?>
+						</div>
+                                        <?php } ?> 
+					<?php } ?>
+			
+			</section>
 	<?php
 		/**
 		 * woocommerce_sidebar hook

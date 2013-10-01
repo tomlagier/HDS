@@ -1690,7 +1690,7 @@ p.demo_store {
   font-family: "WebSymbolsRegular";
 }
 .star-rating:before {
-  content: "RRRRR";
+  content: "OOOOO";
   float: left;
   top: 0;
   left: 0;
@@ -1706,7 +1706,7 @@ p.demo_store {
   padding-top: 1.5em;
 }
 .star-rating span:before {
-  content: "RRRRR";
+  content: "NNNNN";
   top: 0;
   position: absolute;
   left: 0;

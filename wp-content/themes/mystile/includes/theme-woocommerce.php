@@ -215,7 +215,7 @@ remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_prod
 
 if ( ! function_exists( 'woocommerce_output_related_products' ) && version_compare( WOOCOMMERCE_VERSION, "2.1" ) < 0 ) {
 	function woocommerce_output_related_products() {
-	    woocommerce_related_products( -1, 4 );
+	    woocommerce_related_products( 4, 4 );
 	}
 }
 
@@ -364,8 +364,8 @@ function header_add_to_cart_fragment( $fragments ) {
 function woocommerce_cart_link() {
 	global $woocommerce;
 	?>
-	<li class="cart">
-	<a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>" class="cart-parent">
+        <li class="cart">
+        <a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>" class="cart-parent">
 		<span>
 	<?php
 	echo $woocommerce->cart->get_cart_total();
@@ -373,7 +373,7 @@ function woocommerce_cart_link() {
 	?>
 	</span>
 	</a>
-	</li>
+        </li>
 	<?php
 }
 }

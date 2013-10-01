@@ -14,7 +14,7 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && basename( __FILE__ ) == basename(
  * @subpackage Template
  */
 	global $woo_options;
-	
+	echo '</div> <!--/#inner-wrapper-->';
 	echo '<div class="footer-wrap">';
 
 	$total = 4;
@@ -56,22 +56,12 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && basename( __FILE__ ) == basename(
 			<?php } ?>
 			</div>
 	
-			<div id="credit" class="col-right">
-	        <?php if( isset( $woo_options['woo_footer_right'] ) && $woo_options['woo_footer_right'] == 'true' ) {
-	
-	        	echo stripslashes( $woo_options['woo_footer_right_text'] );
-	
-			} else { ?>
-				<p><?php _e( 'Powered by', 'woothemes' ); ?> <a href="<?php echo esc_url( 'http://www.wordpress.org' ); ?>">WordPress</a>. <?php _e( 'Designed by', 'woothemes' ); ?> <a href="<?php echo ( isset( $woo_options['woo_footer_aff_link'] ) && ! empty( $woo_options['woo_footer_aff_link'] ) ? esc_url( $woo_options['woo_footer_aff_link'] ) : esc_url( 'http://www.woothemes.com' ) ) ?>"><img src="<?php echo esc_url( get_template_directory_uri().'/images/woothemes.png' ); ?>" width="74" height="19" alt="Woo Themes" /></a></p>
-			<?php } ?>
-			</div>
 	
 		</footer><!-- /#footer  -->
 	
 	</div><!-- / footer-wrap -->
-
-</div><!-- /#wrapper -->
 <?php wp_footer(); ?>
 <?php woo_foot(); ?>
+        <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
 </body>
 </html>

@@ -101,7 +101,7 @@ if ( ( ! is_home() && ! is_front_page() && ! ( is_post_type_archive() && get_opt
 		}
 
 	} elseif ( is_single() && ! is_attachment() ) {
-
+            
 		if ( get_post_type() == 'product' ) {
 
 			echo $prepend;
@@ -109,11 +109,12 @@ if ( ( ! is_home() && ! is_front_page() && ! ( is_post_type_archive() && get_opt
 			if ( $terms = wp_get_post_terms( $post->ID, 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) ) ) {
 
 				$main_term = $terms[0];
-
+                                
 				$ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
 
 				$ancestors = array_reverse( $ancestors );
 
+                                
 				foreach ( $ancestors as $ancestor ) {
 					$ancestor = get_term( $ancestor, 'product_cat' );
 

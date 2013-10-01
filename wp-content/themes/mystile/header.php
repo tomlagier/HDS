@@ -15,7 +15,7 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && basename( __FILE__ ) == basename(
  */
 global $woo_options, $woocommerce;
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?> class="<?php if ( $woo_options['woo_boxed_layout'] == 'true' ) echo 'boxed'; ?> <?php if (!class_exists('woocommerce')) echo 'woocommerce-deactivated'; ?>">
+<html <?php language_attributes(); ?> class="<?php if ( $woo_options['woo_boxed_layout'] == 'true' ) echo 'boxed'; ?> <?php if (!class_exists('woocommerce')) echo 'woocommerce-deactivated'; ?>" style="margin-top: 0 !important;">
 <head>
 
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -29,15 +29,23 @@ global $woo_options, $woocommerce;
 	wp_head();
 	woo_head();
 ?>
-
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/hearts-desire.js"></script>
+<script src="<?php echo get_bloginfo('template_directory'); ?>/includes/js/jquery.spritely.js" type="text/javascript"></script>
 </head>
 
 <body <?php body_class(); ?>>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=146378588895749";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <?php woo_top(); ?>
 
 <div id="wrapper">
-
-
+    <div id="inner-wrapper">
 
 	<div id="top">
 		<nav class="col-full" role="navigation">
@@ -45,16 +53,14 @@ global $woo_options, $woocommerce;
 				if ( class_exists( 'woocommerce' ) ) {
 					echo '<ul class="nav wc-nav">';
 					if ( is_user_logged_in() ) {
-						$current_user = wp_get_current_user();
 						?> 
-						<li class="welcome-tag"><a href="<?php echo get_edit_user_link(); ?>">Welcome back, <?php echo $current_user->display_name; ?></a></li>
 						<li class="profile-link"><a href="<?php echo get_edit_user_link(); ?>">Profile</a></li>
 						<li class="logout-link"><a href="<?php echo wp_logout_url( $_SERVER["REQUEST_URI"] ); ?>">Logout</a></li>
 					<?php } else {?>
 						<?php //TODO: Switch over to Theme My Login plugin ?>
-						<li class="login-register"><a href="<?php echo wp_login_url( $_SERVER["REQUEST_URI"] ); ?>">Login or Register</a></li>
+						<li class="login-register"><a href="<?php echo wp_login_url( $_SERVER["REQUEST_URI"] ); ?>">Login</a></li>
 					<?php }
-					woocommerce_cart_link();					
+					woocommerce_cart_link();
 					echo '<li class="checkout"><a href="'.esc_url($woocommerce->cart->get_checkout_url()).'">'.__('Checkout','woothemes').'</a></li>';
 					echo get_search_form();
 					echo '</ul>';
@@ -83,7 +89,6 @@ global $woo_options, $woocommerce;
 		    <?php } ?>
 
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-			<button id="skin-calc-button">Skin calculator</button>
 			<h3 class="nav-toggle"><a href="#navigation">&#9776; <span><?php _e('Navigation', 'woothemes'); ?></span></a></h3>
 
 		</hgroup>
@@ -95,7 +100,7 @@ global $woo_options, $woocommerce;
 				<?php wp_nav_menu( array( 'depth' => 6, 'sort_column' => 'menu_order', 'container' => 'ul', 'menu_id' => 'top-nav', 'menu_class' => 'nav fl', 'theme_location' => 'top-menu' ) ); ?>
 			<?php } ?>
 		</nav>
-
+                <div id="bubbles"></div>
 		<nav id="navigation" class="col-full" role="navigation">
 
 			<?php

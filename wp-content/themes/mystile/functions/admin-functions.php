@@ -2108,7 +2108,7 @@ if ( ! function_exists( 'woo_pagination' ) ) {
  */
 function woo_breadcrumbs( $args = array() ) {
 	global $wp_query, $wp_rewrite;
-
+        
 	/* Create an empty variable for the breadcrumb. */
 	$breadcrumb = '';
 
@@ -2164,9 +2164,16 @@ function woo_breadcrumbs( $args = array() ) {
 		$post_id = absint( $wp_query->get_queried_object_id() );
 		$post_type = $post->post_type;
 		$parent = $post->post_parent;
-
+                
+                if ('product' === $post_type) {
+                    $category = array_shift(get_the_terms( $post_id, 'product_cat' )); 
+                        
+                        $trail[] = '<a href="/product-category/'. $category->slug . '" title="' . $category->name . '">' . $category->name . '</a>';
+                        $path .= $category->name;
+                }
+                
 		/* If a custom post type, check if there are any pages in its hierarchy based on the slug. */
-		if ( 'page' !== $post_type && 'post' !== $post_type ) {
+		elseif ( 'page' !== $post_type && 'post' !== $post_type ) {
 
 			$post_type_object = get_post_type_object( $post_type );
 
@@ -2211,7 +2218,7 @@ function woo_breadcrumbs( $args = array() ) {
 
 	/* If we're viewing any type of archive. */
 	elseif ( is_archive() ) {
-
+            
 		/* If viewing a taxonomy term archive. */
 		if ( is_tax() || is_category() || is_tag() ) {
 

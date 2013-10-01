@@ -53,7 +53,6 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && basename( __FILE__ ) == basename(
         ?>
         
 	        <div class="fix"></div>
-        
         	<?php woo_loop_before(); ?>
         	
 			<?php /* Start the Loop */ ?>
